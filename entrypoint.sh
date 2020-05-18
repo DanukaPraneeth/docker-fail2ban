@@ -1,5 +1,9 @@
 #!/bin/sh
 
+chown -R 1000620000:1000620000 /etc
+chown -R 1000620000:1000620000 /var
+exec runuser -u 1000620000 "$@"
+
 TZ=${TZ:-UTC}
 
 F2B_LOG_TARGET=${F2B_LOG_TARGET:-STDOUT}
