@@ -2,7 +2,7 @@
 
 chown -R 1000620000:1000620000 /etc
 chown -R 1000620000:1000620000 /var
-exec runuser -u 1000620000 "$@"
+
 
 TZ=${TZ:-UTC}
 
