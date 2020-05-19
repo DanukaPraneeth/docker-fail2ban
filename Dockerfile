@@ -2,9 +2,9 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.11
 
 # Add a new user "john" with user id 8877
-RUN useradd -u 1000620000 failbanuser
+#RUN useradd -u 1000620000 failbanuser
 # Change to non-root privilege
-USER failbanuser
+#USER failbanuser
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -28,7 +28,7 @@ LABEL maintainer="CrazyMax" \
 ENV FAIL2BAN_VERSION="0.11.1" \
   TZ="UTC"
 
-RUN apk --update --no-cache add \
+RUN groupadd --gid 1000620000 failbanuser &&  apk --update --no-cache add \
     curl \
     ipset \
     iptables \
@@ -51,6 +51,8 @@ RUN apk --update --no-cache add \
   && 2to3 -w --no-diffs bin/* fail2ban \
   && python3 setup.py install \
   && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/*
+
+USER failbanuser
 
 COPY entrypoint.sh /entrypoint.sh
 
