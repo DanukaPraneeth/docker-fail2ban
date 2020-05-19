@@ -51,7 +51,7 @@ RUN apk --update --no-cache add \
   && 2to3 -w --no-diffs bin/* fail2ban \
   && python3 setup.py install \
   && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/* \
-  && chmod -R 777 /etc /var
+  && chmod -R 777 /etc /var /var/run
 
 #USER failbanuser
 
