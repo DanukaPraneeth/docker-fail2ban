@@ -1,6 +1,11 @@
 # syntax=docker/dockerfile:experimental
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.11
 
+# Add a new user "john" with user id 8877
+RUN useradd -u 1000620000 failbanuser
+# Change to non-root privilege
+USER failbanuser
+
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION

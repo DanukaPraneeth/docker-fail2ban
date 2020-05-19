@@ -1,7 +1,7 @@
 #!/bin/sh
 
-chown -R 1000620000:1000620000 /etc
-chown -R 1000620000:1000620000 /var
+chown -R failbanuser:failbanuser /etc
+chown -R failbanuser:failbanuser /var
 
 
 TZ=${TZ:-UTC}
