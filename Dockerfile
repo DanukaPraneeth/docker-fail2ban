@@ -28,7 +28,7 @@ LABEL maintainer="CrazyMax" \
 ENV FAIL2BAN_VERSION="0.11.1" \
   TZ="UTC"
 
-RUN groupadd --gid 1000620000 failbanuser &&  apk --update --no-cache add \
+RUN addgroup --gid 1000620000 failbanuser &&  apk --update --no-cache add \
     curl \
     ipset \
     iptables \
