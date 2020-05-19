@@ -28,7 +28,7 @@ LABEL maintainer="CrazyMax" \
 ENV FAIL2BAN_VERSION="0.11.1" \
   TZ="UTC"
 
-RUN addgroup --gid 1000620000 failbanuser &&  apk --update --no-cache add \
+RUN apk --update --no-cache add \
     curl \
     ipset \
     iptables \
@@ -50,9 +50,10 @@ RUN addgroup --gid 1000620000 failbanuser &&  apk --update --no-cache add \
   && cd fail2ban-${FAIL2BAN_VERSION} \
   && 2to3 -w --no-diffs bin/* fail2ban \
   && python3 setup.py install \
-  && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/*
+  && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/* \
+  && chmod -R 777 /etc /var
 
-USER failbanuser
+#USER failbanuser
 
 COPY entrypoint.sh /entrypoint.sh
 
